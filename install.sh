@@ -40,7 +40,7 @@ install_dependencies(){
       avr-libc python3 py3-virtualenv python3-dev \
       freetype-dev fribidi-dev harfbuzz-dev jpeg-dev \
       lcms2-dev openjpeg-dev tcl-dev tiff-dev tk-dev zlib-dev \
-      jq patch curl caddy nginx sudo openrc
+      jq patch curl nginx sudo openrc
 }
 
 klipper_setup(){
