@@ -34,13 +34,13 @@ status_msg(){
 
 ### install dependencies
 install_dependencies(){
-    status_msg "Installing dependencies..."
-    apk add git unzip python2 python2-dev libffi-dev make \
-        gcc g++ ncurses-dev avrdude gcc-avr binutils-avr \
-        avr-libc python3 py3-virtualenv python3-dev \
-        freetype-dev fribidi-dev harfbuzz-dev jpeg-dev \
-        lcms2-dev openjpeg-dev tcl-dev tiff-dev tk-dev zlib-dev \
-        jq patch curl caddy nginx sudo openrc
+  status_msg "Installing dependencies..."
+  apk add git unzip python2 python2-dev libffi-dev make \
+      gcc g++ ncurses-dev avrdude gcc-avr binutils-avr \
+      avr-libc python3 py3-virtualenv python3-dev \
+      freetype-dev fribidi-dev harfbuzz-dev jpeg-dev \
+      lcms2-dev openjpeg-dev tcl-dev tiff-dev tk-dev zlib-dev \
+      jq patch curl caddy nginx sudo openrc
 }
 
 klipper_setup(){
@@ -137,7 +137,7 @@ create_moonraker_conf(){
   MR_DB="${HOME}/.moonraker_database"
   KLIPPY_UDS="/tmp/klippy_uds"
   MR_CONF_SRC="${SRCDIR}/klipper4a/resources/moonraker.conf"
-  mr_ip_list=()
+
   IP=$(hostname -I | cut -d" " -f1)
   LAN="$(hostname -I | cut -d" " -f1 | cut -d"." -f1-2).0.0/16"
 
@@ -158,17 +158,15 @@ create_moonraker_conf(){
         else
           sed -i "/%LAN%/d" "$MR_CONF"
         fi
-        sed -i "s|%USER%|${USER}|g" "$MR_CONF"
-      ok_msg "moonraker.conf created!"
+      status_msg "moonraker.conf created!"
     else
-      warn_msg "There is already a file called 'moonraker.conf'!"
-      warn_msg "Skipping..."
+      status_msg "There is already a file called 'moonraker.conf'!"
+      status_msg "Skipping..."
     fi
   }
 
   ### write single instance config
   write_mr_conf
-  mr_ip_list+=("$IP:$PORT")
 }
 
 create_moonraker_plugin(){    
